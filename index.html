@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(180deg, #ffffff 0%, #ffc3a0 100%);
+            min-height: 100vh; 
+            width: 100vw;
+            overflow-x: hidden; 
+            overflow-y: auto;   
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Poppins', sans-serif;
+            position: relative;
+        }
+
+       
+        .heart {
+            position: fixed; 
+            bottom: -10px;
+            color: #ff6b81;
+            font-size: 20px;
+            animation: floatUp linear forwards;
+            opacity: 0.7;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-110vh) scale(0.5); opacity: 0; }
+        }
+
+       
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 600px;
+          
+            min-height: 500px; 
+            height: auto; 
+            padding: 40px 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
+            text-align: center;
+            z-index: 10;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         
+            transition: all 0.3s ease; 
+            margin: 20px 0; 
+        }
+
+        .photo-slot {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #ffe4e1;
+            margin-bottom: 20px;
+            overflow: hidden;
+            border: 5px solid #ff6b81;
+            flex-shrink: 0;
+        }
+
+        .photo-slot img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;      
+            object-position: center; 
+        }
+
+        h1 {
+            color: #ff4757;
+            font-family: 'Pacifico', cursive;
+            font-size: 28px;
+            margin-bottom: 20px;
+            line-height: 1.4;
+            z-index: 20;
+            position: relative;
+        }
+        .buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+            margin-top: 20px;
+            position: static;
+        }
+
+        button {
+            padding: 12px 30px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.2s ease, background 0.3s ease;
+            outline: none;
+            z-index: 30;
+        }
+
+   
+        #yesBtn {
+            background-color: #ff4757;
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 71, 87, 0.4);
+        }
+        
+        #yesBtn:hover {
+            transform: scale(1.05);
+            background-color: #ff6b81;
+        }
+
+ 
+        #noBtn {
+            background-color: #f1f2f6;
+            color: #a4b0be;
+            border: 2px solid #dfe4ea;
+            position: relative;
+        }
+
+
+        .success-message {
+            display: none; 
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+     
+        .success-message img {
+            width: 100%;       
+            height: auto;      
+            border-radius: 15px;
+            margin-top: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="mainCard">
+        <div class="photo-slot" id="photoSlot">
+            <img src="uwu.jpeg" alt="Significant Other">   
+        </div>
+
+        <h1 id="questionText">XX, will you be my Valentine?</h1> <!--Replace XX here with ur crush's name brodie-->
+
+        <div class="buttons" id="buttonsContainer">
+            <button id="noBtn">No</button>
+            <button id="yesBtn">Yes</button>
+        </div>
+
+        <div class="success-message" id="successMsg">
+            <h1>Yay! I knew it! ❤️</h1>
+            <p style="color: #ff6b81; font-size: 18px; margin-bottom: 10px;">See you on the 14th!</p>
+            
+            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZDRjd2VheTBoNzEwdnFmdWY0d3UxZDY2ZTBuOTg0ZDBsanMxamh4aCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/T70hpBP1L0N7U0jtkq/giphy.gif" alt="Celebration GIF">
+            
+        </div>
+    </div>
+
+    <script>
+     
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            const emojis = ['❤️', '💖'];
+            heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 3 + "s";
+            heart.style.fontSize = Math.random() * 50 + 10 + "px"; 
+            document.body.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 6000);
+        }
+        setInterval(createHeart, 300);
+
+
+        const noBtn = document.getElementById('noBtn');
+        const yesBtn = document.getElementById('yesBtn');
+        const card = document.getElementById('mainCard');
+        const questionText = document.getElementById('questionText');
+        const successMsg = document.getElementById('successMsg');
+        const buttonsContainer = document.getElementById('buttonsContainer');
+        const photoSlot = document.getElementById('photoSlot');
+
+        
+        const moveNoButton = () => {
+            const cardRect = card.getBoundingClientRect();
+            const textRect = questionText.getBoundingClientRect();
+            const btnRect = noBtn.getBoundingClientRect();
+
+       
+            const minTop = (textRect.bottom - cardRect.top) + 20; 
+            const maxTop = cardRect.height - btnRect.height - 20;
+            const minLeft = 20;
+            const maxLeft = cardRect.width - btnRect.width - 20;
+
+          
+            if (maxTop > minTop) {
+                const randomTop = Math.random() * (maxTop - minTop) + minTop;
+                const randomLeft = Math.random() * (maxLeft - minLeft) + minLeft;
+
+                noBtn.style.position = 'absolute';
+                noBtn.style.left = randomLeft + 'px';
+                noBtn.style.top = randomTop + 'px';
+            }
+            
+            const funnyTexts = ["Nope!", "Try again", "Can't catch me", "Click Yes!"];
+            noBtn.innerText = funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
+        };
+
+        noBtn.addEventListener('mouseover', moveNoButton);
+        noBtn.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            moveNoButton();
+        });
+
+        yesBtn.addEventListener('click', () => {
+            // Hide the initial elements
+            questionText.style.display = 'none';
+            buttonsContainer.style.display = 'none';
+            photoSlot.style.display = 'none';
+            noBtn.style.display = 'none';
+
+         
+            successMsg.style.display = 'flex';
+            
+            
+            card.style.minHeight = "auto"; 
+
+    
+            for(let i = 0; i < 50; i++) {
+                setTimeout(createHeart, i * 30);
+            }
+        });
+
+    </script>
+</body>
+</html>
